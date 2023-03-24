@@ -3,7 +3,7 @@ package ru.kata.spring.boot_security.demo.configs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -26,11 +26,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/").authenticated()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
                 .and()
                 .formLogin()
                 .and()
-                .logout().logoutSuccessUrl("/users")
+                .logout().logoutSuccessUrl("/")
                 .permitAll();
     }
 
@@ -39,10 +39,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-        return daoAuthenticationProvider;
-    }
 }
+/*
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/guest/login", "/guest/registration", "/error").permitAll()
+                .anyRequest().hasAnyRole("USER", "ADMIN")
+                .and()
+                .formLogin().loginPage("/guest/login")
+                .loginProcessingUrl("/guest/login/check")
+                .successHandler(new CustomAuthenticationSuccessHandler())
+                .failureUrl("/guest/login?error")
+                .and()
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/guest/login")
+ */
