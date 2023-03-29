@@ -23,33 +23,6 @@ public class UserController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User userDetails = (User) authentication.getPrincipal();
         user.addAttribute("user", userService.getUserById(userDetails.getId()).get());
-        return "/user/users";
+        return "user_form";
     }
 }
-/*
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
-
-import java.util.List;
-
-@Controller
-public class UserController {
-    private final UserServiceImpl userServiceImpl;
-
-    @Autowired
-    public UserController(UserServiceImpl userServiceImpl) {
-        this.userServiceImpl = userServiceImpl;
-    }
-
-    @GetMapping("/users")
-    public String getAll(Model model) {
-        List<User> users = userServiceImpl.getAllUsers();
-        model.addAttribute("users", users);
-        return "users";
-    }
-}
- */

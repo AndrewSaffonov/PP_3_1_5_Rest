@@ -29,5 +29,14 @@ public class TableFirstInit {
         admin.setRoles(adminRoles);
 
         userService.saveUser(admin);
+
+        User user = new User("ivan@ivan", "ivanov");
+        Role userRole1 = new Role("ROLE_USER");
+
+        Set<Role> adminRoles1 = new HashSet<>();
+        adminRoles1.add(userRole1);
+        user.setRoles(adminRoles1);
+
+        userService.saveUser(user);
     }
 }

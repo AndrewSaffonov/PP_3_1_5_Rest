@@ -4,6 +4,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Set;
 
 
@@ -18,6 +19,9 @@ public class User implements UserDetails {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "age")
+    private Integer age;
     @Column(name = "email")
     private String email;
     @Column(name = "password")
@@ -61,6 +65,10 @@ public class User implements UserDetails {
         this.lastName = lastName;
     }
 
+    public Integer getAge() {return age;}
+
+    public void setAge(Integer age) {this.age = age;}
+
     public String getEmail() {
         return email;
     }
@@ -85,12 +93,22 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+    public boolean isAdmin() {
+        for (Role role : roles) {
+            if (Objects.equals(role.getRoleName(), "ROLE_ADMIN")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", age='" + age + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
