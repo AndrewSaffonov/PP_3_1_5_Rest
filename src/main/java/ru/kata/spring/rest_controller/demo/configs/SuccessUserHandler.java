@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.configs;
+package ru.kata.spring.rest_controller.demo.configs;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,10 +29,10 @@ public class SuccessUserHandler implements AuthenticationSuccessHandler {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority authority : authorities) {
             if (authority.getAuthority().equals("ROLE_ADMIN")) {
-                redirectStrategy.sendRedirect(request, response, "/admin/page");
+                redirectStrategy.sendRedirect(request, response, "/admin");
                 return;
             }
         }
-        redirectStrategy.sendRedirect(request, response, "/user/page");
+        redirectStrategy.sendRedirect(request, response, "/user");
     }
 }
