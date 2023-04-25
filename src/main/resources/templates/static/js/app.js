@@ -11,11 +11,17 @@ $(async function () {
     deleteUser()
 })
 
+
+// Utility Functions
+
+// Getting User
 async function getUser(id) {
     let response = await fetch('/api/users/' + id)
     return await response.json()
 }
 
+
+// Filling modal form
 async function fillModalForm(form, modal, id) {
     modal.show()
     let user = await getUser(id)
@@ -79,7 +85,6 @@ function editUser() {
                 })
             }
         }
-
         fetch('/api/users', {
             method: 'PUT',
             headers: {
@@ -93,6 +98,7 @@ function editUser() {
                 age: editModalForm.age.value,
                 email: editModalForm.email.value,
                 password: editModalForm.password.value
+
             })
         }).then(() => {
             $('#editModalCloseButton').click()
@@ -107,10 +113,10 @@ async function openDeleteModal(id) {
     await fillModalForm(deleteModalForm, modal, id)
     switch (deleteModalForm.roles.value) {
         case '1':
-            deleteModalForm.roles.value = 'USER'
+            deleteModalForm.roles.value = 'ADMIN'
             break
         case '2':
-            deleteModalForm.roles.value = 'ADMIN'
+            deleteModalForm.roles.value = 'USER'
             break
 
     }
@@ -145,7 +151,6 @@ function addUser() {
                 })
             }
         }
-        console.log(newUserRoles);
         fetch('/api/users', {
             method: 'POST',
             headers: {

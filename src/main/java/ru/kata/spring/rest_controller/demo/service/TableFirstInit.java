@@ -26,7 +26,6 @@ public class TableFirstInit {
             adminRoles.add(userRole);
             adminRoles.add(adminRole);
             User admin = new User(adminRoles,"admin", "admin", (byte) 35, "admin@mail.ru", "admin@mail.ru", "admin");
-            System.out.println('1');
 
             userService.save(admin);
         }

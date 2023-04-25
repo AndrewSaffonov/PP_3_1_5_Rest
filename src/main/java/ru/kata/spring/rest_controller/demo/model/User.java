@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "users", uniqueConstraints = {@UniqueConstraint(name = "eMail",columnNames = {"email"})})
+@Table(name = "user", uniqueConstraints = {@UniqueConstraint(name = "eMail",columnNames = {"email"})})
 public class User implements UserDetails {
     @Id
     @Column(name = "id")
@@ -95,7 +95,6 @@ public class User implements UserDetails {
 
     public void addRole(Role role) {roles.add(role);}
 
-
     @Override
     public String getPassword() {return password;}
 
@@ -135,6 +134,4 @@ public class User implements UserDetails {
                 ", password='" + password + '\'' +
                 '}';
     }
-
-
 }

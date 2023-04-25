@@ -28,19 +28,13 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Transactional(readOnly = true)
-    public List<User> listAll() {
-        return userRepository.findAll();
-    }
+    public List<User> listAll() {return userRepository.findAll();}
 
     @Transactional(readOnly = true)
-    public User getById(Long id) {
-        return userRepository.findById(id).orElse(null);
-    }
+    public User getById(Long id) {return userRepository.findById(id).orElse(null);}
 
     @Transactional
-    public void deleteById(Long id) {
-        userRepository.deleteById(id);
-    }
+    public void deleteById(Long id) {userRepository.deleteById(id);}
 
     @Transactional
     public void update(User user) {

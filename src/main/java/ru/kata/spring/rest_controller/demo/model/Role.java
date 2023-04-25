@@ -6,10 +6,8 @@ import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.*;
 import java.util.List;
 
-
-
 @Entity
-@Table(name = "roles")
+@Table(name = "role")
 public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +16,9 @@ public class Role implements GrantedAuthority {
     @Column(name = "authority")
     private String authority;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "roles")
-    List<User> users;
+//    @JsonIgnore
+//    @ManyToMany(mappedBy = "roles")
+//    List<User> users;
 
     public Role() {}
 
@@ -31,7 +29,7 @@ public class Role implements GrantedAuthority {
 
     public String getAuthority() {return authority;}
 
-    public Long getId() {return id;}
+/*    public Long getId() {return id;}
 
     public void setId(Long id) {this.id = id;}
 
@@ -40,6 +38,7 @@ public class Role implements GrantedAuthority {
     public List<User> getUsers() {return users;}
 
     public void setUsers(List<User> users) {this.users = users;}
+*/
 
     @Override
     public String toString() {
@@ -59,15 +58,9 @@ public class Role implements GrantedAuthority {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
+        if (this == obj) {return true;}
+        if (obj == null) {return false;}
+        if (getClass() != obj.getClass()) {return false;}
         Role other = (Role) obj;
         if (id == null) {
             return other.id == null;
