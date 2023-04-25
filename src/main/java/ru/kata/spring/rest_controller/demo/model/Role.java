@@ -29,16 +29,15 @@ public class Role implements GrantedAuthority {
 
     public String getAuthority() {return authority;}
 
-/*    public Long getId() {return id;}
+//    public Long getId() {return id;}
 
-    public void setId(Long id) {this.id = id;}
+//    public void setId(Long id) {this.id = id;}
 
-    public void setAuthority(String authority) {this.authority = authority;}
+//    public void setAuthority(String authority) {this.authority = authority;}
 
-    public List<User> getUsers() {return users;}
+//    public List<User> getUsers() {return users;}
 
-    public void setUsers(List<User> users) {this.users = users;}
-*/
+//    public void setUsers(List<User> users) {this.users = users;}
 
     @Override
     public String toString() {
